@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PresetDetailMapper">
+	<!-- 已预约情报取得 -->
+	<select id="getPresetDetailList" parameterType="java.util.HashMap" resultType="com.entity.PresetDateInfo">
+	    SELECT
+	        meeting_room
+	        , meeting_str_date
+	        , meeting_end_date
+	      FROM
+	        preset_detail
+	      WHERE
+	        meeting_room = #{meetingRoom}
+	        AND meeting_date = #{meetingDate}
+	    ORDER BY
+	        meeting_str_date
+	</select>
+	
+	<!-- 预约信息插入 -->
+	<insert id="saveMeetingInfo" parameterType="com.entity.MtteingInsertEntity">
+		insert into preset_detail 
+		values(#{meetingRoom},#{meetingStrDate},#{meetingEndDate},#{meetingDate},#{presetUser},#{presetUserTel},#{presetUserEmail},#{reason},#{comment})
+	</insert>
+</mapper>
